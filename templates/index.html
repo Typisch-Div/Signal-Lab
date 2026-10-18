@@ -4,287 +4,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Customer Churn Predictor</title>
-
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+    <meta name="theme-color" content="#080d18">
+    <meta name="description" content="Explore customer churn risk with a machine-learning prediction demo.">
+    <title>Signal Lab — Customer Churn Predictor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
 
-<div class="container">
-
-    <div class="header">
-        <h1>Customer Churn Predictor</h1>
-        <p>Predict the probability of customer churn</p>
-    </div>
-
-
-    <form action="/predict" method="POST">
-
-        <div class="section">
-            <h2>Customer Information</h2>
-
-            <div class="grid">
-
-                <!-- Gender -->
-                <div class="field">
-                    <label>Gender</label>
-                    <select name="gender">
-                        <option value="Female">Female</option>
-                        <option value="Male">Male</option>
-                    </select>
-                </div>
-
-                <!-- Senior Citizen -->
-                <div class="field">
-                    <label>Senior Citizen</label>
-                    <select name="SeniorCitizen">
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
-                    </select>
-                </div>
-
-                <!-- Partner -->
-                <div class="field">
-                    <label>Partner</label>
-                    <select name="Partner">
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                    </select>
-                </div>
-
-                <!-- Dependents -->
-                <div class="field">
-                    <label>Dependents</label>
-                    <select name="Dependents">
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                    </select>
-                </div>
-
-                <!-- Tenure -->
-                <div class="field">
-                    <label>Tenure (months)</label>
-                    <input type="number"
-                           name="tenure"
-                           min="0"
-                           max="100"
-                           value="12"
-                           required>
-                </div>
-
-                <!-- Phone Service -->
-                <div class="field">
-                    <label>Phone Service</label>
-                    <select name="PhoneService">
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
-                </div>
-
-                <!-- Multiple Lines -->
-                <div class="field">
-                    <label>Multiple Lines</label>
-                    <select name="MultipleLines">
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No phone service">
-                            No phone service
-                        </option>
-                    </select>
-                </div>
-
-                <!-- Internet Service -->
-                <div class="field">
-                    <label>Internet Service</label>
-                    <select name="InternetService">
-                        <option value="DSL">DSL</option>
-                        <option value="Fiber optic">Fiber optic</option>
-                        <option value="No">No</option>
-                    </select>
-                </div>
-
-                <!-- Online Security -->
-                <div class="field">
-                    <label>Online Security</label>
-                    <select name="OnlineSecurity">
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No internet service">
-                            No internet service
-                        </option>
-                    </select>
-                </div>
-
-                <!-- Online Backup -->
-                <div class="field">
-                    <label>Online Backup</label>
-                    <select name="OnlineBackup">
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No internet service">
-                            No internet service
-                        </option>
-                    </select>
-                </div>
-
-                <!-- Device Protection -->
-                <div class="field">
-                    <label>Device Protection</label>
-                    <select name="DeviceProtection">
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No internet service">
-                            No internet service
-                        </option>
-                    </select>
-                </div>
-
-                <!-- Tech Support -->
-                <div class="field">
-                    <label>Tech Support</label>
-                    <select name="TechSupport">
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No internet service">
-                            No internet service
-                        </option>
-                    </select>
-                </div>
-
-                <!-- Streaming TV -->
-                <div class="field">
-                    <label>Streaming TV</label>
-                    <select name="StreamingTV">
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No internet service">
-                            No internet service
-                        </option>
-                    </select>
-                </div>
-
-                <!-- Streaming Movies -->
-                <div class="field">
-                    <label>Streaming Movies</label>
-                    <select name="StreamingMovies">
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No internet service">
-                            No internet service
-                        </option>
-                    </select>
-                </div>
-
-                <!-- Contract -->
-                <div class="field">
-                    <label>Contract</label>
-                    <select name="Contract">
-                        <option value="Month-to-month">
-                            Month-to-month
-                        </option>
-                        <option value="One year">One year</option>
-                        <option value="Two year">Two year</option>
-                    </select>
-                </div>
-
-                <!-- Paperless Billing -->
-                <div class="field">
-                    <label>Paperless Billing</label>
-                    <select name="PaperlessBilling">
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
-                </div>
-
-                <!-- Payment Method -->
-                <div class="field">
-                    <label>Payment Method</label>
-                    <select name="PaymentMethod">
-
-                        <option value="Electronic check">
-                            Electronic check
-                        </option>
-
-                        <option value="Mailed check">
-                            Mailed check
-                        </option>
-
-                        <option value="Bank transfer (automatic)">
-                            Bank transfer (automatic)
-                        </option>
-
-                        <option value="Credit card (automatic)">
-                            Credit card (automatic)
-                        </option>
-
-                    </select>
-                </div>
-
-                <!-- Monthly Charges -->
-                <div class="field">
-                    <label>Monthly Charges</label>
-                    <input type="number"
-                           name="MonthlyCharges"
-                           step="0.01"
-                           min="0"
-                           value="70"
-                           required>
-                </div>
-
-                <!-- Total Charges -->
-                <div class="field">
-                    <label>Total Charges</label>
-                    <input type="number"
-                           name="TotalCharges"
-                           step="0.01"
-                           min="0"
-                           value="840"
-                           required>
-                </div>
-
+    <div class="app-shell">
+        <header class="topbar">
+            <a class="brand" href="/" aria-label="Signal Lab home">
+                <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+                <span>SIGNAL<span class="brand-light">LAB</span></span>
+            </a>
+            <div class="topbar-meta">
+                <span class="live-dot" aria-hidden="true"></span>
+                <span>RETENTION INTELLIGENCE</span>
+                <span class="topbar-divider"></span>
+                <span class="topbar-version">DEMO / 01</span>
             </div>
-        </div>
+        </header>
 
+        <main>
+            <section class="hero" aria-labelledby="page-title">
+                <div class="hero-copy">
+                    <p class="eyebrow"><span>01</span> CUSTOMER SIGNAL ANALYSIS</p>
+                    <h1 id="page-title">See the signal<br>before they <em>leave.</em></h1>
+                    <p class="hero-description">Explore the patterns behind customer churn. Add an account profile to estimate its likelihood of leaving.</p>
+                </div>
+                <div class="hero-art" aria-hidden="true">
+                    <div class="art-grid"></div>
+                    <div class="orbit orbit-outer"></div>
+                    <div class="orbit orbit-inner"></div>
+                    <div class="signal-core"><span></span></div>
+                    <div class="signal-label signal-label-top">BEHAVIORAL<br>SIGNALS</div>
+                    <div class="signal-label signal-label-bottom">MODEL<br>RESPONSE</div>
+                    <div class="signal-line"></div>
+                </div>
+            </section>
 
-        <button type="submit">
-            Predict Churn
-        </button>
+            <div class="workspace">
+                <div class="form-column">
+                    <form action="/predict" method="POST" class="predict-form">
+                        <section class="form-card" aria-labelledby="form-heading">
+                            <div class="form-card-heading">
+                                <div>
+                                    <p class="card-kicker">CUSTOMER PROFILE</p>
+                                    <h2 id="form-heading">Build a customer signal</h2>
+                                </div>
+                                <span class="input-count">19 <span>INPUTS</span></span>
+                            </div>
 
-    </form>
+                            <div class="field-group">
+                                <div class="group-heading">
+                                    <span class="group-index">A</span>
+                                    <div><h3>About the customer</h3><p>Personal details and relationship length</p></div>
+                                </div>
+                                <div class="field-grid">
+                                    <div class="field"><label for="gender">Gender</label><select id="gender" name="gender"><option value="Female">Female</option><option value="Male">Male</option></select></div>
+                                    <div class="field"><label for="SeniorCitizen">Senior citizen</label><select id="SeniorCitizen" name="SeniorCitizen"><option value="0">No</option><option value="1">Yes</option></select></div>
+                                    <div class="field"><label for="Partner">Partner</label><select id="Partner" name="Partner"><option value="No">No</option><option value="Yes">Yes</option></select></div>
+                                    <div class="field"><label for="Dependents">Dependents</label><select id="Dependents" name="Dependents"><option value="No">No</option><option value="Yes">Yes</option></select></div>
+                                    <div class="field"><label for="tenure">Tenure <span class="label-unit">MONTHS</span></label><input id="tenure" type="number" name="tenure" min="0" max="100" value="12" required></div>
+                                </div>
+                            </div>
 
+                            <div class="field-group">
+                                <div class="group-heading">
+                                    <span class="group-index">B</span>
+                                    <div><h3>Services &amp; support</h3><p>Products and features on the account</p></div>
+                                </div>
+                                <div class="field-grid">
+                                    <div class="field"><label for="PhoneService">Phone service</label><select id="PhoneService" name="PhoneService"><option value="Yes">Yes</option><option value="No">No</option></select></div>
+                                    <div class="field"><label for="MultipleLines">Multiple lines</label><select id="MultipleLines" name="MultipleLines"><option value="No">No</option><option value="Yes">Yes</option><option value="No phone service">No phone service</option></select></div>
+                                    <div class="field"><label for="InternetService">Internet service</label><select id="InternetService" name="InternetService"><option value="DSL">DSL</option><option value="Fiber optic">Fiber optic</option><option value="No">No</option></select></div>
+                                    <div class="field"><label for="OnlineSecurity">Online security</label><select id="OnlineSecurity" name="OnlineSecurity"><option value="No">No</option><option value="Yes">Yes</option><option value="No internet service">No internet service</option></select></div>
+                                    <div class="field"><label for="OnlineBackup">Online backup</label><select id="OnlineBackup" name="OnlineBackup"><option value="No">No</option><option value="Yes">Yes</option><option value="No internet service">No internet service</option></select></div>
+                                    <div class="field"><label for="DeviceProtection">Device protection</label><select id="DeviceProtection" name="DeviceProtection"><option value="No">No</option><option value="Yes">Yes</option><option value="No internet service">No internet service</option></select></div>
+                                    <div class="field"><label for="TechSupport">Tech support</label><select id="TechSupport" name="TechSupport"><option value="No">No</option><option value="Yes">Yes</option><option value="No internet service">No internet service</option></select></div>
+                                    <div class="field"><label for="StreamingTV">Streaming TV</label><select id="StreamingTV" name="StreamingTV"><option value="No">No</option><option value="Yes">Yes</option><option value="No internet service">No internet service</option></select></div>
+                                    <div class="field"><label for="StreamingMovies">Streaming movies</label><select id="StreamingMovies" name="StreamingMovies"><option value="No">No</option><option value="Yes">Yes</option><option value="No internet service">No internet service</option></select></div>
+                                </div>
+                            </div>
 
-    {% if prediction %}
+                            <div class="field-group">
+                                <div class="group-heading">
+                                    <span class="group-index">C</span>
+                                    <div><h3>Plan &amp; billing</h3><p>Contract, payment preference, and charges</p></div>
+                                </div>
+                                <div class="field-grid">
+                                    <div class="field"><label for="Contract">Contract</label><select id="Contract" name="Contract"><option value="Month-to-month">Month-to-month</option><option value="One year">One year</option><option value="Two year">Two year</option></select></div>
+                                    <div class="field"><label for="PaperlessBilling">Paperless billing</label><select id="PaperlessBilling" name="PaperlessBilling"><option value="Yes">Yes</option><option value="No">No</option></select></div>
+                                    <div class="field"><label for="PaymentMethod">Payment method</label><select id="PaymentMethod" name="PaymentMethod"><option value="Electronic check">Electronic check</option><option value="Mailed check">Mailed check</option><option value="Bank transfer (automatic)">Bank transfer (automatic)</option><option value="Credit card (automatic)">Credit card (automatic)</option></select></div>
+                                    <div class="field"><label for="MonthlyCharges">Monthly charges <span class="label-unit">$ / MONTH</span></label><input id="MonthlyCharges" type="number" name="MonthlyCharges" step="0.01" min="0" value="70" required></div>
+                                    <div class="field"><label for="TotalCharges">Total charges <span class="label-unit">$</span></label><input id="TotalCharges" type="number" name="TotalCharges" step="0.01" min="0" value="840" required></div>
+                                </div>
+                            </div>
 
-    <div class="result">
+                            <button type="submit"><span>Run churn analysis</span><span class="button-arrow" aria-hidden="true">↗</span></button>
+                            <p class="form-note"><span aria-hidden="true">✳</span> This is an estimate to support exploration, not a guarantee of customer behavior.</p>
+                        </section>
+                    </form>
 
-        <h2>Prediction Result</h2>
+                    {% if prediction %}
+                    <section class="result-card {% if 'High' in prediction %}high-risk{% else %}low-risk{% endif %}" aria-live="polite" aria-labelledby="result-heading">
+                        <div class="result-topline"><span class="result-kicker">MODEL OUTPUT</span><span class="result-tag">ANALYSIS COMPLETE</span></div>
+                        <h2 id="result-heading">{{ prediction }}</h2>
+                        <div class="result-value">{{ probability }}<span>%</span></div>
+                        <div class="result-meter" role="img" aria-label="Estimated churn probability: {{ probability }} percent"><span style="width: {{ probability }}%"></span></div>
+                        <p>{{ message }}</p>
+                    </section>
+                    {% endif %}
+                </div>
 
-        <div class="
-            {% if 'High' in prediction %}
-                high-risk
-            {% else %}
-                low-risk
-            {% endif %}
-        ">
-
-            <h3>{{ prediction }}</h3>
-
-            <div class="probability">
-                {{ probability }}%
+                <aside class="insight-panel" aria-label="About this prediction">
+                    <div class="panel-topline"><span>THE ENGINE</span><span class="engine-status"><i></i> READY</span></div>
+                    <div class="engine-visual" aria-hidden="true">
+                        <div class="engine-ring ring-one"></div>
+                        <div class="engine-ring ring-two"></div>
+                        <div class="engine-ring ring-three"></div>
+                        <div class="engine-center"><span>LR</span></div>
+                        <span class="engine-node node-one"></span>
+                        <span class="engine-node node-two"></span>
+                        <span class="engine-node node-three"></span>
+                        <span class="engine-node node-four"></span>
+                    </div>
+                    <p class="engine-name">Logistic Regression</p>
+                    <p class="engine-description">A classification model estimates the likelihood of churn from the profile signals.</p>
+                    <div class="panel-rule"></div>
+                    <div class="output-row"><span>OUTPUT</span><strong>Risk + probability</strong></div>
+                    <div class="output-row"><span>INPUTS</span><strong>19 account signals</strong></div>
+                    <div class="panel-footnote"><span class="footnote-mark">i</span><p>Use the result to explore patterns. Review real customers with your own business context.</p></div>
+                </aside>
             </div>
+        </main>
 
-            <p>{{ message }}</p>
-
-        </div>
-
+        <footer class="footer"><span>BUILT FOR EXPLORATION</span><span>CHURN SIGNALS / 2026</span></footer>
     </div>
-
-    {% endif %}
-
-</div>
-
 </body>
 </html>
